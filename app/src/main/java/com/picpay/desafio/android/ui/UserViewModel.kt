@@ -1,6 +1,5 @@
 package com.picpay.desafio.android.ui
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,22 +30,17 @@ class UserViewModel @Inject constructor(
     }
 
     private fun showUsers() {
-
         repository.getUsers()
             .enqueue(object : Callback<List<User>> {
                 override fun onFailure(call: Call<List<User>>, t: Throwable) {
-                    println("deu ruim")
-                    Log.i("http", "Erro no onResponse")
                     _state.value = UserState.DisplayError
                 }
 
                 override fun onResponse(call: Call<List<User>>, response: Response<List<User>>) {
                     if (response.isSuccessful) {
-                        println("funcionou")
                         response.body().let {
                             _state.value = it?.let { it1 -> UserState.DisplayUsers(it1) }
                         }
-
                     }
                 }
             })

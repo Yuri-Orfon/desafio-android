@@ -52,14 +52,14 @@ class MainFragment : Fragment() {
         viewModel.run {
             state.observe(viewLifecycleOwner) { state ->
                 when (state) {
-                    is UserState.DisplayUsers -> onSuccess(state.response)
+                    is UserState.DisplayUsers -> displayUsers(state.response)
                     is UserState.DisplayError -> onError()
                 }
             }
         }
     }
 
-    private fun onSuccess(response: List<User>) {
+    private fun displayUsers(response: List<User>) {
         binding.userListProgressBar.setVisible(false)
 
         adapter = UserListAdapter()
