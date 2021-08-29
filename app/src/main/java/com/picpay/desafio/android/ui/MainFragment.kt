@@ -39,15 +39,9 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setView()
         setListeners()
         setObservers()
-
         viewModel.handleIntent(UserIntent.InitAdapter)
-    }
-
-    private fun setView() {
-
     }
 
     private fun setListeners() {
