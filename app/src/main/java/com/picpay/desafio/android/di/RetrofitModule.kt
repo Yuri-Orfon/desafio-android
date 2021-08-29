@@ -1,8 +1,7 @@
 package com.picpay.desafio.android.di
 
 import com.google.gson.GsonBuilder
-import com.picpay.desafio.android.data.remote.retrofit.Api
-import com.picpay.desafio.android.data.remote.retrofit.PicPayService
+import com.picpay.desafio.android.data.service.PicPayService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

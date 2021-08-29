@@ -1,11 +1,8 @@
 package com.picpay.desafio.android.data.datasource
 
-import com.picpay.desafio.android.data.remote.model.User
-import com.picpay.desafio.android.data.remote.retrofit.PicPayService
-import com.picpay.desafio.android.ui.UserState
+import com.picpay.desafio.android.data.model.User
+import com.picpay.desafio.android.data.service.PicPayService
 import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 interface UserDataSource {

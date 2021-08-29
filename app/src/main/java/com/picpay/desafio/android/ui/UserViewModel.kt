@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.picpay.desafio.android.data.remote.model.User
+import com.picpay.desafio.android.data.model.User
 import com.picpay.desafio.android.data.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call

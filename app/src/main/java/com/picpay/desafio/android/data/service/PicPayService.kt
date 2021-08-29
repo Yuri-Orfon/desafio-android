@@ -1,6 +1,6 @@
-package com.picpay.desafio.android.data.remote.retrofit
+package com.picpay.desafio.android.data.service
 
-import com.picpay.desafio.android.data.remote.model.User
+import com.picpay.desafio.android.data.model.User
 import retrofit2.Call
 import retrofit2.http.GET
 

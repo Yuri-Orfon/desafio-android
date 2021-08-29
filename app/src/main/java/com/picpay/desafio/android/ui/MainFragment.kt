@@ -9,11 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.picpay.desafio.android.R
-import com.picpay.desafio.android.data.remote.model.User
+import com.picpay.desafio.android.data.model.User
 import com.picpay.desafio.android.databinding.FragmentMainBinding
 import com.picpay.desafio.android.utils.extensions.setVisible
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Response
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
