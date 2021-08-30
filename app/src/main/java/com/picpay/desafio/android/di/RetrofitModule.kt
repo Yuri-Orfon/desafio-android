@@ -1,5 +1,8 @@
 package com.picpay.desafio.android.di
 
+import android.app.Application
+import androidx.room.Room
+import com.picpay.desafio.android.data.dao.UserDataBase
 import com.picpay.desafio.android.data.service.PicPayService
 import dagger.Module
 import dagger.Provides
@@ -26,4 +29,9 @@ object RetrofitModule {
     fun providePicPayService(retrofit: Retrofit): PicPayService =
          retrofit.create(PicPayService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application) : UserDataBase =
+        Room.databaseBuilder(app, UserDataBase::class.java, "user_database")
+            .build()
 }

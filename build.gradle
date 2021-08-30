@@ -23,6 +23,7 @@ buildscript {
         test_runner_version = '1.1.1'
         espresso_version = '3.1.1'
 
+        room_version = "2.3.0"
         dagger_version = "2.23.2"
         hilt_lifecycle_version = '2.38.1'
         hilt_version = '2.38.1'
