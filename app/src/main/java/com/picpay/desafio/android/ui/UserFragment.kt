@@ -7,10 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.data.model.User
 import com.picpay.desafio.android.databinding.FragmentUserBinding
+import com.picpay.desafio.android.utils.Resource
 import com.picpay.desafio.android.utils.extensions.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,41 +39,35 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setListeners()
-        setObservers()
-        viewModel.handleIntent(UserIntent.InitAdapter)
+        setView()
+        displayUsers()
     }
 
-    private fun setListeners() {
+    private fun setView() {
         binding.userListProgressBar.setVisible(true)
     }
 
-    private fun setObservers() {
-        viewModel.run {
-            state.observe(viewLifecycleOwner) { state ->
-                when (state) {
-                    is UserState.DisplayUsers -> displayUsers(state.response)
-                    is UserState.DisplayError -> onError()
-                }
-            }
-        }
-    }
-
-    private fun displayUsers(response: List<User>) {
+    private fun displayUsers() {
         val userAdapter = UserListAdapter()
-        binding.userListProgressBar.setVisible(false)
 
         binding.apply {
             recyclerView.apply {
                 adapter = userAdapter
                 layoutManager = LinearLayoutManager(context)
             }
-        }
 
-        userAdapter.users = response
+            viewModel.users.observe(viewLifecycleOwner) { result ->
+                userAdapter.submitList(result.data)
+
+                userListProgressBar.setVisible(result is Resource.Loading && result.data.isNullOrEmpty())
+                if(result is Resource.Error && result.data.isNullOrEmpty()) {
+                    displayError()
+                }
+            }
+        }
     }
 
-    private fun onError() {
+    private fun displayError() {
         val message = getString(R.string.error)
 
         binding.userListProgressBar.setVisible(false)
