@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.picpay.desafio.android.ui.MainFragment"
+        android:name="com.picpay.desafio.android.ui.UserFragment"
         android:label="main_fragment"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_user" >
         <action
             android:id="@+id/action_mainFragment_to_placeholder"
             app:destination="@id/placeholder" />

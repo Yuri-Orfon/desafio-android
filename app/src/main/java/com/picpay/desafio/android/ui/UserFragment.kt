@@ -10,24 +10,22 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.picpay.desafio.android.R
 import com.picpay.desafio.android.data.model.User
-import com.picpay.desafio.android.databinding.FragmentMainBinding
+import com.picpay.desafio.android.databinding.FragmentUserBinding
 import com.picpay.desafio.android.utils.extensions.setVisible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class UserFragment : Fragment() {
 
     private val viewModel: UserViewModel by viewModels()
-
-    private lateinit var adapter: UserListAdapter
-    private lateinit var binding: FragmentMainBinding
+    private lateinit var binding: FragmentUserBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainBinding.inflate(
+        binding = FragmentUserBinding.inflate(
             inflater,
             container,
             false
@@ -60,12 +58,17 @@ class MainFragment : Fragment() {
     }
 
     private fun displayUsers(response: List<User>) {
+        val userAdapter = UserListAdapter()
         binding.userListProgressBar.setVisible(false)
 
-        adapter = UserListAdapter()
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter.users = response
+        binding.apply {
+            recyclerView.apply {
+                adapter = userAdapter
+                layoutManager = LinearLayoutManager(context)
+            }
+        }
+
+        userAdapter.users = response
     }
 
     private fun onError() {
