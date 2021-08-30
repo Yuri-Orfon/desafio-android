@@ -1,12 +1,10 @@
 package com.picpay.desafio.android.di
 
-import com.google.gson.GsonBuilder
 import com.picpay.desafio.android.data.service.PicPayService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -17,14 +15,15 @@ object RetrofitModule {
 
     @Singleton
     @Provides
-    fun providePicPayService(): PicPayService {
-        return Retrofit.Builder()
-            .baseUrl("https://609a908e0f5a13001721b74e.mockapi.io/picpay/api/")
-            .client(
-                OkHttpClient.Builder()
-                .build())
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+    fun provideRetrofit(): Retrofit =
+        Retrofit.Builder()
+            .baseUrl(PicPayService.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(PicPayService::class.java)
-    }
+
+    @Singleton
+    @Provides
+    fun providePicPayService(retrofit: Retrofit): PicPayService =
+         retrofit.create(PicPayService::class.java)
+
 }
